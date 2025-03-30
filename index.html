@@ -5,13 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eu e Érica</title>
     <style>
-        /* Estilos CSS vão aqui */
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .slider {
+            width: 500px;
+            height: 300px;
+            position: relative;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .slide.active {
+            opacity: 1;
+        }
+        .declaracao {
+            text-align: center;
+            font-size: 20px;
+            margin: 20px;
+        }
     </style>
 </head>
 <body>
-    <!-- Conteúdo do site vai aqui -->
+    <h1>Eu e Érica</h1>
+    <iframe src="https://open.spotify.com/embed/track/SEU_CODIGO_AQUI" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+    <div class="slider">
+        <img src="fotos/foto1.jpg" alt="Nós dois" class="slide active">
+        <img src="fotos/foto2.jpg" alt="Nós dois" class="slide">
+        <img src="fotos/foto3.jpg" alt="Nós dois" class="slide">
+    </div>
+
+    <div id="contador">
+        <p>Tempo juntos: <span id="tempo"></span></p>
+    </div>
+
+    <div class="declaracao">
+        <p>Érica, você é o amor da minha vida. Cada dia com você é uma aventura incrível, e eu sou grato por cada momento que compartilhamos. Te amo para sempre!</p>
+    </div>
+
     <script>
-        // Código JavaScript vai aqui
+        // Slider
+        let slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        function nextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+        setInterval(nextSlide, 3000);
+
+        // Contador
+        function atualizarContador() {
+            const inicio = new Date('2023-01-15'); // Substitua pela sua data
+            const agora = new Date();
+            const diferenca = agora - inicio;
+
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+            document.getElementById('tempo').innerText = `${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos`;
+        }
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
     </script>
 </body>
 </html>
